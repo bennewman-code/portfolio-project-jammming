@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import './searchBar.js';
 
 function App() {
   return (
