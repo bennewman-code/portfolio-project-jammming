@@ -128,9 +128,9 @@ async function refreshToken() {
 
   return await response.json();
 }
-
-async function getUserData() {
-  const response = await fetch("https://api.spotify.com/v1/me", {
+//just added search to the endpoint
+async function getSearchResult() {
+  const response = await fetch("https://api.spotify.com/v1/search", {
     method: 'GET',
     headers: { 'Authorization': 'Bearer ' + currentToken.access_token },
   });
