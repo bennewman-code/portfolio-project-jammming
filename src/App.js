@@ -9,7 +9,6 @@ function App() {
   setupTokenRefresh();
   document.getElementById('loginBtn').addEventListener('click', loginWithSpotifyClick);
   document.getElementById('logoutBtn').addEventListener('click', logoutClick);
-  document.getElementById('refreshTokenBtn').addEventListener('click', refreshTokenClick);
 
   return (
     <div className="App">
@@ -17,7 +16,6 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <button id="loginBtn">Login with Spotify</button>
         <button id="logoutBtn">Logout</button>
-        <button id="refreshTokenBtn">Refresh Token</button>
         <SearchBar />
         <p>
           Edit <code>src/App.js</code> and save to reload.
