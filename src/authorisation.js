@@ -13,18 +13,16 @@ const currentToken = {
   get refresh_token() { return localStorage.getItem('refresh_token') || null; },
   get expires_in() { return localStorage.getItem('refresh_in') || null },
   get expires() { return localStorage.getItem('expires') || null },
+};
 
-  save: function (response) {
+function saveToken(response) {
     const { access_token, refresh_token, expires_in } = response;
     localStorage.setItem('access_token', access_token);
     localStorage.setItem('refresh_token', refresh_token);
-    localStorage.setItem('expires_in', expires_in);
-
     const now = new Date();
     const expiry = new Date(now.getTime() + (expires_in * 1000));
     localStorage.setItem('expires', expiry);
-  }
-};
+}
 
 async function redirectToSpotifyAuthorize() {
   const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -56,6 +54,42 @@ async function redirectToSpotifyAuthorize() {
   window.location.href = authUrl.toString(); // Redirect the user to the authorization server for login
 }
 
+//automatic refreshtoken
+
+// Function to check if token is expired
+function isTokenExpired() {
+    const expiry = new Date(localStorage.getItem('expires'));
+    const now = new Date();
+    return now >= expiry;
+}
+
+async function refreshToken() {
+    const response = await fetch(tokenEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: new URLSearchParams({
+        client_id: clientId,
+        grant_type: 'refresh_token',
+        refresh_token: currentToken.refresh_token
+      }),
+    });
+  
+    const newToken = await response.json();
+    saveToken(newToken);
+}
+
+function setupTokenRefresh() {
+    setInterval(async () => {
+      if (isTokenExpired()) {
+        await refreshToken();
+        console.log('Token refreshed');
+      }
+    }, 5 * 60 * 1000);
+}
+
+
 // Soptify API Calls
 async function getToken(code) {
   const code_verifier = localStorage.getItem('code_verifier');
@@ -77,21 +111,6 @@ async function getToken(code) {
   return await response.json();
 }
 
-async function refreshToken() {
-  const response = await fetch(tokenEndpoint, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    body: new URLSearchParams({
-      client_id: clientId,
-      grant_type: 'refresh_token',
-      refresh_token: currentToken.refresh_token
-    }),
-  });
-
-  return await response.json();
-}
 //just added search to the endpoint
 async function getSearchResult() {
   const response = await fetch("https://api.spotify.com/v1/search", {
@@ -112,10 +131,4 @@ async function logoutClick() {
   window.location.href = redirectUrl;
 }
 
-async function refreshTokenClick() {
-  const token = await refreshToken();
-  currentToken.save(token);
-}
-
-
-export { redirectToSpotifyAuthorize, getToken, currentToken };
+export { redirectToSpotifyAuthorize, getToken, currentToken, setupTokenRefresh };

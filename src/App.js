@@ -2,9 +2,11 @@ import logo from './logo.svg';
 import './App.css';
 import SearchBar from './searchBar.js';
 import { handleLogin } from './login.js';
+import { setupTokenRefresh } from './authorisation.js';
 
 function App() {
   handleLogin();
+  setupTokenRefresh();
   return (
     <div className="App">
       <header className="App-header">
