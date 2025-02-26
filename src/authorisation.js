@@ -1,6 +1,6 @@
 //This file is for authorisation of logins and api calls
 const clientId = '03ce66bd50a54bb78f5d89c1c401407e'; // your clientId
-const redirectUrl = 'http://localhost:3000';        // your redirect URL - must be localhost URL and/or HTTPS
+const redirectUrl = 'http://127.0.0.1:3000/callback';        // your redirect URL - must be localhost URL and/or HTTPS
 
 const authorizationEndpoint = "https://accounts.spotify.com/authorize";
 const tokenEndpoint = "https://accounts.spotify.com/api/token";
@@ -131,4 +131,4 @@ async function logoutClick() {
   window.location.href = redirectUrl;
 }
 
-export { redirectToSpotifyAuthorize, getToken, currentToken, setupTokenRefresh, loginWithSpotifyClick, logoutClick };
+export { redirectToSpotifyAuthorize, getToken, currentToken, saveToken, setupTokenRefresh, loginWithSpotifyClick, logoutClick };

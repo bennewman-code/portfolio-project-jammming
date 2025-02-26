@@ -1,4 +1,4 @@
-import { redirectToSpotifyAuthorize, getToken, currentToken } from './authorisation.js';
+import { redirectToSpotifyAuthorize, getToken, currentToken, saveToken } from './authorisation.js';
 
 async function handleLogin() {
 
@@ -8,7 +8,7 @@ const code = args.get('code');
 // If we find a code, we're in a callback, do a token exchange
 if (code) {
   const token = await getToken(code);
-  currentToken.save(token);
+  saveToken(token);
 
   // Remove code from URL so we can refresh correctly.
   const url = new URL(window.location.href);
