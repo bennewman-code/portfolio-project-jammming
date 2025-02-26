@@ -53,14 +53,14 @@ if (code) {
 // If we have a token, we're logged in, so fetch user data and render logged in template
 if (currentToken.access_token) {
   const userData = await getUserData();
-  renderTemplate("main", "logged-in-template", userData);
-  renderTemplate("oauth", "oauth-template", currentToken);
+  //renderTemplate("main", "logged-in-template", userData);
+  //renderTemplate("oauth", "oauth-template", currentToken);
 }
 
 // Otherwise we're not logged in, so render the login template
-if (!currentToken.access_token) {
-  renderTemplate("main", "login");
-}
+//if (!currentToken.access_token) {
+  //renderTemplate("main", "login");
+//}
 
 async function redirectToSpotifyAuthorize() {
   const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -151,7 +151,7 @@ async function logoutClick() {
 async function refreshTokenClick() {
   const token = await refreshToken();
   currentToken.save(token);
-  renderTemplate("oauth", "oauth-template", currentToken);
+  //renderTemplate("oauth", "oauth-template", currentToken);
 }
 
 
