@@ -1,8 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
 import SearchBar from './searchBar.js';
+import { handleLogin } from './login.js';
 
 function App() {
+  handleLogin();
   return (
     <div className="App">
       <header className="App-header">
