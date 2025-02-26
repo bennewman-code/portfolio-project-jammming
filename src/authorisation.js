@@ -131,4 +131,4 @@ async function logoutClick() {
   window.location.href = redirectUrl;
 }
 
-export { redirectToSpotifyAuthorize, getToken, currentToken, setupTokenRefresh };
+export { redirectToSpotifyAuthorize, getToken, currentToken, setupTokenRefresh, loginWithSpotifyClick, logoutClick };

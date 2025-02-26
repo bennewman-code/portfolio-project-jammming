@@ -2,15 +2,22 @@ import logo from './logo.svg';
 import './App.css';
 import SearchBar from './searchBar.js';
 import { handleLogin } from './login.js';
-import { setupTokenRefresh } from './authorisation.js';
+import { setupTokenRefresh, loginWithSpotifyClick, logoutClick } from './authorisation.js';
 
 function App() {
   handleLogin();
   setupTokenRefresh();
+  document.getElementById('loginBtn').addEventListener('click', loginWithSpotifyClick);
+  document.getElementById('logoutBtn').addEventListener('click', logoutClick);
+  document.getElementById('refreshTokenBtn').addEventListener('click', refreshTokenClick);
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <button id="loginBtn">Login with Spotify</button>
+        <button id="logoutBtn">Logout</button>
+        <button id="refreshTokenBtn">Refresh Token</button>
         <SearchBar />
         <p>
           Edit <code>src/App.js</code> and save to reload.
