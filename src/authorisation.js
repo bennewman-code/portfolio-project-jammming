@@ -62,7 +62,7 @@ function isTokenExpired() {
     const now = new Date();
     return now >= expiry;
 }
-
+// Refreshes the Token
 async function refreshToken() {
     const response = await fetch(tokenEndpoint, {
       method: 'POST',
@@ -79,7 +79,7 @@ async function refreshToken() {
     const newToken = await response.json();
     saveToken(newToken);
 }
-
+// Checks if token is expired every 5min
 function setupTokenRefresh() {
     setInterval(async () => {
       if (isTokenExpired()) {
