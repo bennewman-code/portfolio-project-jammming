@@ -1,14 +1,33 @@
 import logo from './logo.svg';
 import './App.css';
+import React, { useEffect } from 'react';
 import SearchBar from './searchBar.js';
 import { handleLogin } from './login.js';
 import { setupTokenRefresh, loginWithSpotifyClick, logoutClick } from './authorisation.js';
 
 function App() {
-  handleLogin();
-  setupTokenRefresh();
-  document.getElementById('loginBtn').addEventListener('click', loginWithSpotifyClick);
-  document.getElementById('logoutBtn').addEventListener('click', logoutClick);
+  useEffect(() => {
+    handleLogin();
+    setupTokenRefresh();
+  }, []);
+  useEffect(() => {
+    const loginBtn = document.getElementById('loginBtn');
+    if (loginBtn) {
+      loginBtn.addEventListener('click', loginWithSpotifyClick);
+      return () => {
+        loginBtn.removeEventListener('click', loginWithSpotifyClick);
+      };
+    }
+  }, []);
+  useEffect(() => {
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', logoutClick);
+      return () => {
+        logoutBtn.removeEventListener('click', logoutClick);
+      };
+    }
+  }, []);
 
   return (
     <div className="App">
