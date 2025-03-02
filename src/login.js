@@ -1,5 +1,5 @@
 import { redirectToSpotifyAuthorize, getToken, currentToken, saveToken } from './authorisation.js';
-
+// So this code is used if you want automatic login as soon as the page is loaded but id rather they use the login button to give them a choice
 async function handleLogin() {
 
 const args = new URLSearchParams(window.location.search);

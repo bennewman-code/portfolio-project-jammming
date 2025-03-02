@@ -7,7 +7,6 @@ import { setupTokenRefresh, loginWithSpotifyClick, logoutClick } from './authori
 
 function App() {
   useEffect(() => {
-    handleLogin();
     setupTokenRefresh();
   }, []);
   useEffect(() => {
