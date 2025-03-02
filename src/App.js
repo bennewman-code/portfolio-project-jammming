@@ -2,7 +2,6 @@ import logo from './logo.svg';
 import './App.css';
 import React, { useEffect } from 'react';
 import SearchBar from './searchBar.js';
-import { handleLogin } from './login.js';
 import { setupTokenRefresh, loginWithSpotifyClick, logoutClick } from './authorisation.js';
 
 function App() {
