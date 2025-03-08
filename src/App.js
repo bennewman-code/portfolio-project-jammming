@@ -1,28 +1,41 @@
 import logo from './logo.svg';
 import './App.css';
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchBar from './searchBar.js';
-import { setupTokenRefresh, loginWithSpotifyClick, logoutClick } from './authorisation.js';
+import { setupTokenRefresh, loginWithSpotifyClick, logoutClick, currentToken, handleRedirect } from './authorisation.js';
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
-    setupTokenRefresh();
+    handleRedirect();
+    if (currentToken.access_token) {
+      setIsLoggedIn(true);
+      setupTokenRefresh();
+    }
   }, []);
   useEffect(() => {
+    const login = () => {
+      loginWithSpotifyClick();
+      setIsLoggedIn(true);
+    }
     const loginBtn = document.getElementById('loginBtn');
     if (loginBtn) {
-      loginBtn.addEventListener('click', loginWithSpotifyClick);
+      loginBtn.addEventListener('click', login);
       return () => {
-        loginBtn.removeEventListener('click', loginWithSpotifyClick);
+        loginBtn.removeEventListener('click', login);
       };
     }
   }, []);
   useEffect(() => {
+    const logout = () => {
+      logoutClick();
+      setIsLoggedIn(false);
+    }
     const logoutBtn = document.getElementById('logoutBtn');
     if (logoutBtn) {
-      logoutBtn.addEventListener('click', logoutClick);
+      logoutBtn.addEventListener('click', logout);
       return () => {
-        logoutBtn.removeEventListener('click', logoutClick);
+        logoutBtn.removeEventListener('click', logout);
       };
     }
   }, []);
@@ -31,9 +44,18 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <button id="loginBtn">Login with Spotify</button>
-        <button id="logoutBtn">Logout</button>
-        <SearchBar />
+        {isLoggedIn ? (
+          <div>
+            <button id="logoutBtn">Logout</button>
+            <SearchBar />
+          </div>
+        ) : (
+          <div>
+            <button id="loginBtn">Login with Spotify</button>
+            <button id="logoutBtn">Logout</button>
+            <SearchBar />
+          </div>
+        )}
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>

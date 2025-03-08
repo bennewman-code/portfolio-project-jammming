@@ -53,6 +53,18 @@ async function redirectToSpotifyAuthorize() {
   authUrl.search = new URLSearchParams(params).toString();
   window.location.href = authUrl.toString(); // Redirect the user to the authorization server for login
 }
+// handles the redirect back from spotify to make sure the auth saved in local file
+async function handleRedirect() {
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('code');
+
+  if (code) {
+    const tokenResponse = await getToken(code);
+    saveToken(tokenResponse);
+    window.history.replaceState({}, document.title, "/"); //clears the url makes it so can't see the authorisation code after load
+  }
+}
+
 
 //automatic refreshtoken
 
@@ -131,4 +143,4 @@ async function logoutClick() {
   window.location.href = redirectUrl;
 }
 
-export { redirectToSpotifyAuthorize, getToken, currentToken, saveToken, setupTokenRefresh, loginWithSpotifyClick, logoutClick };
+export { redirectToSpotifyAuthorize, getToken, currentToken, saveToken, setupTokenRefresh, loginWithSpotifyClick, logoutClick, handleRedirect };
