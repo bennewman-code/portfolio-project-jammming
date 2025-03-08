@@ -140,7 +140,6 @@ async function loginWithSpotifyClick() {
 
 async function logoutClick() {
   localStorage.clear();
-  window.location.href = redirectUrl;
 }
 
 export { redirectToSpotifyAuthorize, getToken, currentToken, saveToken, setupTokenRefresh, loginWithSpotifyClick, logoutClick, handleRedirect };
