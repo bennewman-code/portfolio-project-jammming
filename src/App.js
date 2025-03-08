@@ -14,15 +14,11 @@ function App() {
     }
   }, []);
   useEffect(() => {
-    const login = () => {
-      loginWithSpotifyClick();
-      setIsLoggedIn(true);
-    }
     const loginBtn = document.getElementById('loginBtn');
     if (loginBtn) {
-      loginBtn.addEventListener('click', login);
+      loginBtn.addEventListener('click', loginWithSpotifyClick);
       return () => {
-        loginBtn.removeEventListener('click', login);
+        loginBtn.removeEventListener('click', loginWithSpotifyClick);
       };
     }
   }, []);
