@@ -7,34 +7,24 @@ import { setupTokenRefresh, loginWithSpotifyClick, logoutClick, currentToken, ha
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
-    handleRedirect();
-    if (currentToken.access_token) {
-      setIsLoggedIn(true);
-      setupTokenRefresh();
-    }
+    const checkToken = async () => {
+      await handleRedirect();
+      if (currentToken.access_token) {
+        setIsLoggedIn(true);
+        setupTokenRefresh();
+      }
+    };
+    checkToken();
   }, []);
-  useEffect(() => {
-    const loginBtn = document.getElementById('loginBtn');
-    if (loginBtn) {
-      loginBtn.addEventListener('click', loginWithSpotifyClick);
-      return () => {
-        loginBtn.removeEventListener('click', loginWithSpotifyClick);
-      };
-    }
-  }, []);
-  useEffect(() => {
-    const logout = () => {
-      logoutClick();
-      setIsLoggedIn(false);
-    }
-    const logoutBtn = document.getElementById('logoutBtn');
-    if (logoutBtn) {
-      logoutBtn.addEventListener('click', logout);
-      return () => {
-        logoutBtn.removeEventListener('click', logout);
-      };
-    }
-  }, []);
+
+  const handleLogin = () => {
+    loginWithSpotifyClick();
+  };
+
+  const handleLogout = () => {
+    logoutClick();
+    setIsLoggedIn(false);
+  };
 
   return (
     <div className="App">
@@ -42,13 +32,12 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         {isLoggedIn ? (
           <div>
-            <button id="logoutBtn">Logout</button>
+            <button onClick={ handleLogout }>Logout</button>
             <SearchBar />
           </div>
         ) : (
           <div>
-            <button id="loginBtn">Login with Spotify</button>
-            <button id="logoutBtn">Logout</button>
+            <button onClick={ handleLogin }>Login with Spotify</button>
             <SearchBar />
           </div>
         )}

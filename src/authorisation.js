@@ -135,7 +135,7 @@ async function getSearchResult() {
 
 // Click handlers
 async function loginWithSpotifyClick() {
-  await redirectToSpotifyAuthorize();
+  redirectToSpotifyAuthorize();
 }
 
 async function logoutClick() {
