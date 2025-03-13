@@ -124,13 +124,18 @@ async function getToken(code) {
 }
 
 //just added search to the endpoint
-async function getSearchResult() {
-  const response = await fetch("https://api.spotify.com/v1/search", {
+async function getSearchResult(searchTerm, searchType = 'track') {
+  const encodedSearchTerm = encodeURIComponent(searchTerm);
+  const url = `https://api.spotify.com/v1/search?q=${encodedSearchTerm}&type=${searchType}`;
+  const response = await fetch(url, {
     method: 'GET',
     headers: { 'Authorization': 'Bearer ' + currentToken.access_token },
   });
-
-  return await response.json();
+  if (response.ok) {
+    return await response.json();
+  } else {
+    console.error('Search request failed:', response.statusText);
+  }
 }
 
 // Click handlers
@@ -142,4 +147,4 @@ async function logoutClick() {
   localStorage.clear();
 }
 
-export { redirectToSpotifyAuthorize, getToken, currentToken, saveToken, setupTokenRefresh, loginWithSpotifyClick, logoutClick, handleRedirect };
+export { redirectToSpotifyAuthorize, getToken, currentToken, saveToken, setupTokenRefresh, loginWithSpotifyClick, logoutClick, handleRedirect, getSearchResult };
