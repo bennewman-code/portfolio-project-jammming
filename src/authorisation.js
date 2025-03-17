@@ -105,7 +105,6 @@ function setupTokenRefresh() {
 // Soptify API Calls
 async function getToken(code) {
   const code_verifier = localStorage.getItem('code_verifier');
-
   const response = await fetch(tokenEndpoint, {
     method: 'POST',
     headers: {
@@ -125,6 +124,7 @@ async function getToken(code) {
 
 //just added search to the endpoint
 async function getSearchResult(searchTerm, searchType = 'track') {
+  console.log('Current access token:', currentToken.access_token); 
   const encodedSearchTerm = encodeURIComponent(searchTerm);
   const url = `https://api.spotify.com/v1/search?q=${encodedSearchTerm}&type=${searchType}`;
   const response = await fetch(url, {
