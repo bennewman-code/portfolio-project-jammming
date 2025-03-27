@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  // So the React.StrictMode is making compontents run twice as well as useEffects to see if the app can hold up too errors
   <React.StrictMode>
     <App />
   </React.StrictMode>

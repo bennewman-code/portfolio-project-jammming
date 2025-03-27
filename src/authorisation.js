@@ -15,8 +15,12 @@ const currentToken = {
   get expires() { return localStorage.getItem('expires') || null },
 };
 
+// Takes code from the handle redirect then puts it into localstorage
 function saveToken(response) {
     const { access_token, refresh_token, expires_in } = response;
+    console.log('Access Token:', access_token);
+    console.log('Refresh Token:', refresh_token);
+    console.log('Expires In:', expires_in);
     localStorage.setItem('access_token', access_token);
     localStorage.setItem('refresh_token', refresh_token);
     const now = new Date();
@@ -54,17 +58,19 @@ async function redirectToSpotifyAuthorize() {
   window.location.href = authUrl.toString(); // Redirect the user to the authorization server for login
 }
 // handles the redirect back from spotify to make sure the auth saved in local file
+// Need to make this specific function safer so if the component accidentlly runs twice then it wont break
 async function handleRedirect() {
   const params = new URLSearchParams(window.location.search);
   const code = params.get('code');
-
+  console.log('code: ', code);
   if (code) {
     const tokenResponse = await getToken(code);
     saveToken(tokenResponse);
+    //checking if the local storage works here
+    console.log('access_token from local storage:', localStorage.getItem('access_token'));
     window.history.replaceState({}, document.title, "/"); //clears the url makes it so can't see the authorisation code after load
   }
 }
-
 
 //automatic refreshtoken
 
