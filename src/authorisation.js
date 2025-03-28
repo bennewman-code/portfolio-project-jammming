@@ -58,18 +58,35 @@ async function redirectToSpotifyAuthorize() {
   window.location.href = authUrl.toString(); // Redirect the user to the authorization server for login
 }
 // handles the redirect back from spotify to make sure the auth saved in local file
-// Need to make this specific function safer so if the component accidentlly runs twice then it wont break
 async function handleRedirect() {
+  // So this try here helps check if the functions already runs and if it has then it just returns straight away 
+  try {
+    if (localStorage.getItem('redirectHandled')) {
+      console.log('Redirect already handled.');
+      return;
+    }
   const params = new URLSearchParams(window.location.search);
   const code = params.get('code');
   console.log('code: ', code);
+  // This if statement checks if theres code in browser then takes that code and calls getToken
   if (code) {
     const tokenResponse = await getToken(code);
-    saveToken(tokenResponse);
-    //checking if the local storage works here
-    console.log('access_token from local storage:', localStorage.getItem('access_token'));
+    // This if statement checks if theres an access_token within the tokenResponse
+    if (tokenResponse.access_token) {
+      saveToken(tokenResponse);
+      console.log('access_token from local storage:', localStorage.getItem('access_token'));
+      // This sets the localStorage redirectHandled to true meaning its been run once before
+      localStorage.setItem('redirectHandled', 'true');
+      // This else is just to show the error if tokenResponse doesnt bring back something we want
+    } else {
+      console.error('Failed to get token:', tokenResponse);
+    }
     window.history.replaceState({}, document.title, "/"); //clears the url makes it so can't see the authorisation code after load
   }
+  // This catches the error if this function fails
+} catch (error) {
+  console.log('Error handling redirect:', error);
+}
 }
 
 //automatic refreshtoken
