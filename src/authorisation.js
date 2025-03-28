@@ -67,14 +67,12 @@ async function handleRedirect() {
     }
   const params = new URLSearchParams(window.location.search);
   const code = params.get('code');
-  console.log('code: ', code);
   // This if statement checks if theres code in browser then takes that code and calls getToken
   if (code) {
     const tokenResponse = await getToken(code);
     // This if statement checks if theres an access_token within the tokenResponse
     if (tokenResponse.access_token) {
       saveToken(tokenResponse);
-      console.log('access_token from local storage:', localStorage.getItem('access_token'));
       // This sets the localStorage redirectHandled to true meaning its been run once before
       localStorage.setItem('redirectHandled', 'true');
       // This else is just to show the error if tokenResponse doesnt bring back something we want
