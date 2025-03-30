@@ -1,7 +1,18 @@
 import React, { useState } from 'react';
 import { getSearchResult } from './authorisation';
 
-const SearchBar = () => {
+const SearchComponents = () => {
+    const [searchResults, setSearchResults] = useState([]);
+
+    return (
+        <div>
+          <SearchBar setSearchResults={setSearchResults} />
+          <Results searchResults={searchResults} />
+        </div>
+      );
+} 
+
+const SearchBar = ({ setSearchResults }) => {
     const [userInput, setUserInput] = useState('');
     const handleUserInput = (e) => {
         setUserInput(e.target.value);
@@ -11,7 +22,7 @@ const SearchBar = () => {
         if (userInput.trim()) {
             const searchTerm = userInput
             const results = await getSearchResult(searchTerm);
-            console.log(results);
+            setSearchResults(results);
         }
     };
     return (
@@ -22,4 +33,8 @@ const SearchBar = () => {
     )
 }
 
-export default SearchBar;
+const Results = ({ searchResults }) => {
+    console.log(searchResults);
+}
+
+export default SearchComponents;

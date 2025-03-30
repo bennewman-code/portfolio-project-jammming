@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import SearchBar from './searchBar.js';
+import SearchComponents from './searchBar.js';
 import { setupTokenRefresh, loginWithSpotifyClick, logoutClick, currentToken, handleRedirect } from './authorisation.js';
 
 function App() {
@@ -33,12 +33,12 @@ function App() {
         {isLoggedIn ? (
           <div>
             <button onClick={ handleLogout }>Logout</button>
-            <SearchBar />
+            <SearchComponents />
           </div>
         ) : (
           <div>
             <button onClick={ handleLogin }>Login with Spotify</button>
-            <SearchBar />
+            <SearchComponents />
           </div>
         )}
         <p>
