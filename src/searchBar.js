@@ -34,6 +34,9 @@ const SearchBar = ({ setSearchResults }) => {
 }
 
 const Results = ({ searchResults }) => {
+    for (let i = 0; i < Object.keys(searchResults.tracks.tracks.items).length; ++i) {
+        
+    }
     console.log(searchResults);
 }
 
