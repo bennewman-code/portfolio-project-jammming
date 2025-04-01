@@ -34,11 +34,27 @@ const SearchBar = ({ setSearchResults }) => {
 }
 
 const Results = ({ searchResults }) => {
-   /* const tracksArray = Object.keys(searchResults.items);
+    // This if statement stops an error when not having any searchResults causing the code to think its redundent
+    if (!searchResults || !searchResults.tracks || !searchResults.tracks.items) {
+        return null;
+    }
+    const tracksArray = searchResults.tracks.items;
+    const songName = [];
+    const ArtistsName = [];
+    // First for loop runs through the items Array pushes the songNames to an array
     for (let i = 0; i < tracksArray.length; ++i) {
-        console.log(tracksArray.i);
-    }*/
+        songName.push(tracksArray[i].name);
+        // Second for loop is supposed to push artistsNames to the array outside but I think it has to be in previous for loops
+        for (let e = 0; e < tracksArray[i].artists.length; ++e) {
+            ArtistsName.push(tracksArray[i].artists.name);
+        }
+    }
     console.log(searchResults);
+    return (
+        <div>
+            { ArtistsName }
+        </div>
+    )
 }
 
 export default SearchComponents;
