@@ -42,6 +42,7 @@ const Results = ({ searchResults }) => {
     const songName = [];
     const artistsName = [];
     const coverArt = [];
+    const songPackage = [];
     // First for loop runs through the items Array pushes the songNames and coverArt to an array
     for (let i = 0; i < tracksArray.length; ++i) {
         songName.push(tracksArray[i].name);
@@ -53,6 +54,11 @@ const Results = ({ searchResults }) => {
         }
         artistsName.push(tempArtistsName);     
     }
+    // so this for loop packages each song together with its corrosponding artists and cover art 
+    for (let j = 0; j < songName.length; ++j) {
+        songPackage.push([songName[j], artistsName[j], coverArt[j]]);
+    }
+    console.log(songPackage);
     console.log(searchResults);
     /*return (
         <div>
