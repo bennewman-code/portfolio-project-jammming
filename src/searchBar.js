@@ -42,18 +42,17 @@ const Results = ({ searchResults }) => {
     const songName = [];
     const artistsName = [];
     const coverArt = [];
-    // First for loop runs through the items Array pushes the songNames to an array
+    // First for loop runs through the items Array pushes the songNames and coverArt to an array
     for (let i = 0; i < tracksArray.length; ++i) {
         songName.push(tracksArray[i].name);
         coverArt.push(tracksArray[i].album.images[0]);
         const tempArtistsName = [];
-        // Second for loop is supposed to push artistsNames to the array outside but I think it has to be in previous for loops
+        // Second for loop, loops through the artists and adds them to seperet arrays
         for (let e = 0; e < tracksArray[i].artists.length; ++e) {
             tempArtistsName.push(tracksArray[i].artists[e].name);
         }
         artistsName.push(tempArtistsName);     
     }
-    console.log(coverArt);
     console.log(searchResults);
     /*return (
         <div>
