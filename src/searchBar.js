@@ -44,17 +44,19 @@ const Results = ({ searchResults }) => {
     // First for loop runs through the items Array pushes the songNames to an array
     for (let i = 0; i < tracksArray.length; ++i) {
         songName.push(tracksArray[i].name);
+        const tempArtistsName = [];
         // Second for loop is supposed to push artistsNames to the array outside but I think it has to be in previous for loops
         for (let e = 0; e < tracksArray[i].artists.length; ++e) {
-            ArtistsName.push(tracksArray[i].artists.name);
+            tempArtistsName.push(tracksArray[i].artists[e].name);
         }
+        ArtistsName.push(tempArtistsName);     
     }
     console.log(searchResults);
-    return (
+    /*return (
         <div>
             { ArtistsName }
         </div>
-    )
+    )*/
 }
 
 export default SearchComponents;
