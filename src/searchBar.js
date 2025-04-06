@@ -52,19 +52,25 @@ const Results = ({ searchResults }) => {
         for (let e = 0; e < tracksArray[i].artists.length; ++e) {
             tempArtistsName.push(tracksArray[i].artists[e].name);
         }
-        artistsName.push(tempArtistsName);     
-    }
-    // so this for loop packages each song together with its corrosponding artists and cover art 
-    for (let j = 0; j < songName.length; ++j) {
-        songPackage.push([songName[j], artistsName[j], coverArt[j]]);
+        artistsName.push(tempArtistsName);
+        // Originally had another for loop but relised you can put at the end of the first for loop and it will loop same amount of times   
+        songPackage.push([songName[i], artistsName[i], coverArt[i]]);  
     }
     console.log(songPackage);
     console.log(searchResults);
-    /*return (
-        <div>
-            { ArtistsName }
+    // Used map as the return to go through the songPackage Array and unpackage the data into useful jsx
+    // it works by iterating over the songPackage array then using the call back function on each element (the call back functions arugments are the song, Index)
+    return (
+        <div> 
+            {songPackage.map((song, index) => (
+                <div key={ index }>
+                    <p>Name: { song[0] }</p>
+                    <p>Artist: { song[1].join(', ') }</p>
+                    <img src={ song[2].url } width={ song[2].width } height={ song[2].height } alt={ "Cover Art" }/>
+                </div>
+            ))}
         </div>
-    )*/
+    )
 }
 
 export default SearchComponents;
