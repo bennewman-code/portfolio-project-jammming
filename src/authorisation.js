@@ -18,9 +18,6 @@ const currentToken = {
 // Takes code from the handle redirect then puts it into localstorage
 function saveToken(response) {
     const { access_token, refresh_token, expires_in } = response;
-    console.log('Access Token:', access_token);
-    console.log('Refresh Token:', refresh_token);
-    console.log('Expires In:', expires_in);
     localStorage.setItem('access_token', access_token);
     localStorage.setItem('refresh_token', refresh_token);
     const now = new Date();
@@ -145,7 +142,6 @@ async function getToken(code) {
 
 //just added search to the endpoint
 async function getSearchResult(searchTerm, searchType = 'track') {
-  console.log('Current access token:', currentToken.access_token); 
   const encodedSearchTerm = encodeURIComponent(searchTerm);
   const url = `https://api.spotify.com/v1/search?q=${encodedSearchTerm}&type=${searchType}`;
   const response = await fetch(url, {
