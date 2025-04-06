@@ -58,8 +58,9 @@ const Results = ({ searchResults }) => {
         // Originally had another for loop but relised you can put at the end of the first for loop and it will loop same amount of times   
         songPackage.push([songName[i], artistsName[i], coverArt[i]]);  
     }
-    console.log(songPackage);
-    console.log(searchResults);
+    // These two console logs show SearchResults so what we get back then songPackage shows the manipulated data from searchResults that we needed 
+   // console.log(songPackage);
+   // console.log(searchResults);
     // Used map as the return to go through the songPackage Array and unpackage the data into useful jsx
     // it works by iterating over the songPackage array then using the call back function on each element (the call back functions arugments are the song, Index)
     return (
