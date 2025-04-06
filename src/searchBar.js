@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { getSearchResult } from './authorisation';
-
+// This function is the parent function of searchBar and Results it was needed because Results needed the reults inside SearchBar
 const SearchComponents = () => {
     const [searchResults, setSearchResults] = useState([]);
 
@@ -11,12 +11,13 @@ const SearchComponents = () => {
         </div>
       );
 } 
-
+// The first part of this function makes it so the searchBar updates straight away 
 const SearchBar = ({ setSearchResults }) => {
     const [userInput, setUserInput] = useState('');
     const handleUserInput = (e) => {
         setUserInput(e.target.value);
     }
+    // This second function handles taking the users input then using the getSearchResult in authorisation
     const handleSearch = async(e) => {
         e.preventDefault();
         if (userInput.trim()) {
@@ -25,6 +26,7 @@ const SearchBar = ({ setSearchResults }) => {
             setSearchResults(results);
         }
     };
+    // The return sets the searchBar on the dom
     return (
         <form onSubmit={ handleSearch }>
             <input id="searchBar" type="text" onChange={ handleUserInput } value={ userInput } />
