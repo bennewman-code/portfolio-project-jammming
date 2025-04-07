@@ -41,25 +41,20 @@ const Results = ({ searchResults }) => {
         return null;
     }
     const tracksArray = searchResults.tracks.items;
-    const songName = [];
     const artistsName = [];
-    const coverArt = [];
-    const songUri = [];
     const songPackage = [];
     const addedSong = [];
-    // First for loop runs through the items Array pushes the songNames and coverArt to an array
+    // First for loop runs through the length of tracksArray
     for (let i = 0; i < tracksArray.length; ++i) {
-        songName.push(tracksArray[i].name);
-        coverArt.push(tracksArray[i].album.images[0]);
         const tempArtistsName = [];
-        // Second for loop, loops through the artists and adds them to seperet arrays
+        // Second for loop, loops through the artists and adds them to separate arrays
         for (let e = 0; e < tracksArray[i].artists.length; ++e) {
             tempArtistsName.push(tracksArray[i].artists[e].name);
         }
         artistsName.push(tempArtistsName);
-        songUri.push(tracksArray[i].uri);
-        // Originally had another for loop but relised you can put at the end of the first for loop and it will loop same amount of times   
-        songPackage.push([songName[i], artistsName[i], coverArt[i], songUri[i]]);  
+        // Originally had another for loop but relised you can put at the end of the first for loop and it will loop same amount of times
+        // Also originally added more arrays for the name, cover art and song uri but found it as waste of space since you can just push it straight to songPackage   
+        songPackage.push([tracksArray[i].name, artistsName[i], tracksArray[i].album.images[0], tracksArray[i].uri]);  
     }
     const handleClick = (e, index) => {
         addedSong.push(songPackage[index])
