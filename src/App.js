@@ -38,7 +38,6 @@ function App() {
         ) : (
           <div>
             <button onClick={ handleLogin }>Login with Spotify</button>
-            <SearchComponents />
           </div>
         )}
         <p>
