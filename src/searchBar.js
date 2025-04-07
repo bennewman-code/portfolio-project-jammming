@@ -3,11 +3,12 @@ import { getSearchResult } from './authorisation';
 // This function is the parent function of searchBar and Results it was needed because Results needed the reults inside SearchBar
 const SearchComponents = () => {
     const [searchResults, setSearchResults] = useState([]);
+    const [addedSongs, setAddedSongs] = useState([]);
 
     return (
         <div>
-          <SearchBar setSearchResults={setSearchResults} />
-          <Results searchResults={searchResults} />
+          <SearchBar setSearchResults={ setSearchResults } />
+          <Results searchResults={ searchResults } setAddedSongs={ setAddedSongs } />
         </div>
       );
 } 
@@ -35,7 +36,7 @@ const SearchBar = ({ setSearchResults }) => {
     )
 }
 
-const Results = ({ searchResults }) => {
+const Results = ({ searchResults, setAddedSongs }) => {
     // This if statement stops an error when not having any searchResults causing the code to think its redundent
     if (!searchResults || !searchResults.tracks || !searchResults.tracks.items) {
         return null;
@@ -43,7 +44,6 @@ const Results = ({ searchResults }) => {
     const tracksArray = searchResults.tracks.items;
     const artistsName = [];
     const songPackage = [];
-    const addedSong = [];
     // First for loop runs through the length of tracksArray
     for (let i = 0; i < tracksArray.length; ++i) {
         const tempArtistsName = [];
@@ -56,10 +56,10 @@ const Results = ({ searchResults }) => {
         // Also originally added more arrays for the name, cover art and song uri but found it as waste of space since you can just push it straight to songPackage   
         songPackage.push([tracksArray[i].name, artistsName[i], tracksArray[i].album.images[0], tracksArray[i].uri]);  
     }
+    // The setAddedSongs in handleClick using prevAddedSongs allows the state to add multiple songs to the state
     const handleClick = (e, index) => {
-        addedSong.push(songPackage[index])
+        setAddedSongs((prevAddedSongs) => [...prevAddedSongs, songPackage[index]]);
         console.log(e, index);
-        console.log(addedSong);
     }
     // These two console logs show SearchResults so what we get back then songPackage shows the manipulated data from searchResults that we needed 
     // console.log(songPackage);
