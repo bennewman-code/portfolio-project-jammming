@@ -58,6 +58,9 @@ const Results = ({ searchResults }) => {
         // Originally had another for loop but relised you can put at the end of the first for loop and it will loop same amount of times   
         songPackage.push([songName[i], artistsName[i], coverArt[i]]);  
     }
+    const handleClick = (e, index) => {
+        console.log(e, index);
+    }
     // These two console logs show SearchResults so what we get back then songPackage shows the manipulated data from searchResults that we needed 
    // console.log(songPackage);
    // console.log(searchResults);
@@ -70,6 +73,7 @@ const Results = ({ searchResults }) => {
                     <p>Name: { song[0] }</p>
                     <p>Artist: { song[1].join(', ') }</p>
                     <img src={ song[2].url } width={ song[2].width } height={ song[2].height } alt={ "Cover Art" }/>
+                    <button type="button" onClick={ (e) => handleClick(e, index) }>+</button>
                 </div>
             ))}
         </div>
