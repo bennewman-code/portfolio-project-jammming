@@ -44,7 +44,9 @@ const Results = ({ searchResults }) => {
     const songName = [];
     const artistsName = [];
     const coverArt = [];
+    const songUri = [];
     const songPackage = [];
+    const addedSong = [];
     // First for loop runs through the items Array pushes the songNames and coverArt to an array
     for (let i = 0; i < tracksArray.length; ++i) {
         songName.push(tracksArray[i].name);
@@ -55,15 +57,18 @@ const Results = ({ searchResults }) => {
             tempArtistsName.push(tracksArray[i].artists[e].name);
         }
         artistsName.push(tempArtistsName);
+        songUri.push(tracksArray[i].uri);
         // Originally had another for loop but relised you can put at the end of the first for loop and it will loop same amount of times   
-        songPackage.push([songName[i], artistsName[i], coverArt[i]]);  
+        songPackage.push([songName[i], artistsName[i], coverArt[i], songUri[i]]);  
     }
     const handleClick = (e, index) => {
+        addedSong.push(songPackage[index])
         console.log(e, index);
+        console.log(addedSong);
     }
     // These two console logs show SearchResults so what we get back then songPackage shows the manipulated data from searchResults that we needed 
-   // console.log(songPackage);
-   // console.log(searchResults);
+    // console.log(songPackage);
+    // console.log(searchResults);
     // Used map as the return to go through the songPackage Array and unpackage the data into useful jsx
     // it works by iterating over the songPackage array then using the call back function on each element (the call back functions arugments are the song, Index)
     return (

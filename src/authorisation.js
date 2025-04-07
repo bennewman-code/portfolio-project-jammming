@@ -5,7 +5,7 @@ const redirectUrl = 'http://127.0.0.1:3000/callback';        // your redirect UR
 const authorizationEndpoint = "https://accounts.spotify.com/authorize";
 const tokenEndpoint = "https://accounts.spotify.com/api/token";
 //need to add scope for search and others that need to be done
-const scope = 'user-read-private user-read-email';
+const scope = 'user-read-private user-read-email playlist-modify-public playlist-modify-private';
 
 // Data structure that manages the current active token, caching it in localStorage
 const currentToken = {
