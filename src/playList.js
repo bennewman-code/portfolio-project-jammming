@@ -3,7 +3,6 @@ import { SongContext } from './SongContext';
 
 const PlayList = () =>  {
     const { addedSongs, setAddedSongs } = useContext(SongContext);
-    console.log(addedSongs);
 // This function gives the ability to remove songs from the state by filtering out the index given
     const handleClick = (indexToRemove) => {
         setAddedSongs((prevAddedSongs) => prevAddedSongs.filter((_, index) => index !== indexToRemove));
@@ -27,6 +26,23 @@ const PlayList = () =>  {
     )
 }
 
+const CreatePlayList = () => {
+    const { addedSongs } = useContext(SongContext);
+    const handleClick = () => {
+        const uriArray = []
+        if (addedSongs[0] !== undefined) {
+            for (let i = 0; i < addedSongs.length; ++i) {
+                uriArray.push(addedSongs[i][3]);
+            }
+        } else {
+            return;
+        }
+        const uri = uriArray.join();
+        
+    }
+    return (
+        <button type="button" onClick={ handleClick }>Save to Spotify</button>
+    )
+}
 
-
-export default PlayList;
+export { PlayList, CreatePlayList };
