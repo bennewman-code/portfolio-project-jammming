@@ -4,7 +4,7 @@ import { SongContext } from './SongContext';
 const PlayList = () =>  {
     const { addedSongs, setAddedSongs } = useContext(SongContext);
     console.log(addedSongs);
-
+// This function gives the ability to remove songs from the state by filtering out the index given
     const handleClick = (indexToRemove) => {
         setAddedSongs((prevAddedSongs) => prevAddedSongs.filter((_, index) => index !== indexToRemove));
     }
