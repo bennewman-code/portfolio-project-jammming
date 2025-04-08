@@ -157,10 +157,31 @@ async function getSearchResult(searchTerm, searchType = 'track') {
 }
 
 // Playlist creation
+// This function gets the profile of the user
 async function getUserId() {
   const response = await fetch(profileEndpoint, {
     method: 'GET',
     headers: { 'Authorization': 'Bearer ' + currentToken.access_token },
+  });
+  if (response.ok) {
+    return await response.json();
+  } else {
+    console.error('Search request failed:', response.statusText);
+  }
+}
+
+// Creating empty playlist
+async function emptyPlaylist(profileId, userInput) {
+  const url = `https://api.spotify.com/v1/users/${profileId}/playlists`
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer ' + currentToken.access_token },
+    headers: { 'Content-Type': 'application/json' },
+    data: {
+      name: { userInput },
+      description: "Made playlist off spotify!",
+      public: false
+    },
   });
   if (response.ok) {
     return await response.json();
@@ -178,4 +199,4 @@ async function logoutClick() {
   localStorage.clear();
 }
 
-export { redirectToSpotifyAuthorize, getToken, currentToken, saveToken, setupTokenRefresh, loginWithSpotifyClick, logoutClick, handleRedirect, getSearchResult, getUserId };
+export { redirectToSpotifyAuthorize, getToken, currentToken, saveToken, setupTokenRefresh, loginWithSpotifyClick, logoutClick, handleRedirect, getSearchResult, getUserId, emptyPlaylist };

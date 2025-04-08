@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { SongContext } from './SongContext';
-import { getUserId } from './authorisation';
+import { getUserId, emptyPlaylist } from './authorisation';
 
 const PlayList = () =>  {
     const { addedSongs, setAddedSongs } = useContext(SongContext);
@@ -29,6 +29,10 @@ const PlayList = () =>  {
 
 const CreatePlayList = () => {
     const { addedSongs } = useContext(SongContext);
+    const [userInput, setUserInput] = useState('');
+    const handleUserInput = (e) => {
+        setUserInput(e.target.value);
+    }
     const handleClick = async() => {
         const uriArray = []
         if (addedSongs[0] !== undefined) {
@@ -39,13 +43,25 @@ const CreatePlayList = () => {
             return;
         }
         const uri = uriArray.join();
+        // so profile awaits the getUserId in auth file that sends and api request for the users profile then profileId takes the user id from that request
         const profile = await getUserId();
         const profileId = profile.id;
         console.log(profileId);
-
+        if (userInput !== '') {
+            const createEmptyPlaylist = await emptyPlaylist(profileId, userInput);
+            console.log(createEmptyPlaylist);
+        } else {
+            window.alert("Fill in name before saving playlist!");
+            return
+        }
+        
     }
     return (
-        <button type="button" onClick={ handleClick }>Save to Spotify</button>
+        <div>
+            <button type="button" onClick={ handleClick }>Save to Spotify</button>
+            <h4>Name</h4>
+            <input id="searchBar" type="text" onChange={ handleUserInput } value={ userInput } />
+        </div>
     )
 }
 
