@@ -2,6 +2,7 @@
 const clientId = '03ce66bd50a54bb78f5d89c1c401407e'; // your clientId
 const redirectUrl = 'http://127.0.0.1:3000/callback';        // your redirect URL - must be localhost URL and/or HTTPS
 
+const profileEndpoint = "https://api.spotify.com/v1/me"
 const authorizationEndpoint = "https://accounts.spotify.com/authorize";
 const tokenEndpoint = "https://accounts.spotify.com/api/token";
 //need to add scope for search and others that need to be done
@@ -155,6 +156,19 @@ async function getSearchResult(searchTerm, searchType = 'track') {
   }
 }
 
+// Playlist creation
+async function getUserId() {
+  const response = await fetch(profileEndpoint, {
+    method: 'GET',
+    headers: { 'Authorization': 'Bearer ' + currentToken.access_token },
+  });
+  if (response.ok) {
+    return await response.json();
+  } else {
+    console.error('Search request failed:', response.statusText);
+  }
+}
+
 // Click handlers
 async function loginWithSpotifyClick() {
   redirectToSpotifyAuthorize();
@@ -164,4 +178,4 @@ async function logoutClick() {
   localStorage.clear();
 }
 
-export { redirectToSpotifyAuthorize, getToken, currentToken, saveToken, setupTokenRefresh, loginWithSpotifyClick, logoutClick, handleRedirect, getSearchResult };
+export { redirectToSpotifyAuthorize, getToken, currentToken, saveToken, setupTokenRefresh, loginWithSpotifyClick, logoutClick, handleRedirect, getSearchResult, getUserId };

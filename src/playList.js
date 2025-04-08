@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { SongContext } from './SongContext';
+import { getUserId } from './authorisation';
 
 const PlayList = () =>  {
     const { addedSongs, setAddedSongs } = useContext(SongContext);
@@ -28,7 +29,7 @@ const PlayList = () =>  {
 
 const CreatePlayList = () => {
     const { addedSongs } = useContext(SongContext);
-    const handleClick = () => {
+    const handleClick = async() => {
         const uriArray = []
         if (addedSongs[0] !== undefined) {
             for (let i = 0; i < addedSongs.length; ++i) {
@@ -38,7 +39,10 @@ const CreatePlayList = () => {
             return;
         }
         const uri = uriArray.join();
-        
+        const profile = await getUserId();
+        const profileId = profile.id;
+        console.log(profileId);
+
     }
     return (
         <button type="button" onClick={ handleClick }>Save to Spotify</button>
