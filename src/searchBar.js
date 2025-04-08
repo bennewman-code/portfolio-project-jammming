@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { getSearchResult } from './authorisation';
+import { SongContext } from './SongContext';
 // This function is the parent function of searchBar and Results it was needed because Results needed the reults inside SearchBar
 const SearchComponents = () => {
     const [searchResults, setSearchResults] = useState([]);
-    const [addedSongs, setAddedSongs] = useState([]);
+    // Originally was using the same as above but thats local apparently, so i had to use this below
+    const { setAddedSongs } = useContext(SongContext);
 
     return (
         <div>

@@ -3,6 +3,7 @@ import { SongContext } from './SongContext';
 
 const PlayList = () =>  {
     const { addedSongs } = useContext(SongContext);
+    console.log(addedSongs);
     // the h2 Playlist shows up in both login and logout states (it should only show up when logged in need to fix)
     //the ul bit doesnt work so ill have to try some stuff
     /*return (
