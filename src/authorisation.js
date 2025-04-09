@@ -196,7 +196,7 @@ async function addSongs(playlistId, uris) {
     method: 'POST',
     headers: { 'Authorization': 'Bearer ' + currentToken.access_token, 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      uris: [uris],
+      uris: uris,
     }),
   });
   if (response.ok) {
