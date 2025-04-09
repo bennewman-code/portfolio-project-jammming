@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import SearchComponents from './searchBar.js';
+import { PlayList, CreatePlayList } from './playList';
 import { setupTokenRefresh, loginWithSpotifyClick, logoutClick, currentToken, handleRedirect } from './authorisation.js';
 
 function App() {
@@ -34,6 +35,8 @@ function App() {
           <div>
             <button onClick={ handleLogout }>Logout</button>
             <SearchComponents />
+            <CreatePlayList />
+            <PlayList />
           </div>
         ) : (
           <div>
