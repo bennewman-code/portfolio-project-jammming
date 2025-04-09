@@ -175,13 +175,12 @@ async function emptyPlaylist(profileId, userInput) {
   const url = `https://api.spotify.com/v1/users/${profileId}/playlists`
   const response = await fetch(url, {
     method: 'POST',
-    headers: { 'Authorization': 'Bearer ' + currentToken.access_token },
-    headers: { 'Content-Type': 'application/json' },
-    data: {
-      name: { userInput },
+    headers: { 'Authorization': 'Bearer ' + currentToken.access_token, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name: userInput,
       description: "Made playlist off spotify!",
       public: false
-    },
+    }),
   });
   if (response.ok) {
     return await response.json();
