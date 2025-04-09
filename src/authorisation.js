@@ -189,6 +189,23 @@ async function emptyPlaylist(profileId, userInput) {
   }
 }
 
+// Adding songs to playlist
+async function addSongs(playlistId, uris) {
+  const url = `https://api.spotify.com/v1/playlists/${playlistId}/tracks`
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer ' + currentToken.access_token, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      uris: [uris],
+    }),
+  });
+  if (response.ok) {
+    return await response.json();
+  } else {
+    console.error('Search request failed:', response.statusText);
+  }
+}
+
 // Click handlers
 async function loginWithSpotifyClick() {
   redirectToSpotifyAuthorize();
@@ -198,4 +215,4 @@ async function logoutClick() {
   localStorage.clear();
 }
 
-export { redirectToSpotifyAuthorize, getToken, currentToken, saveToken, setupTokenRefresh, loginWithSpotifyClick, logoutClick, handleRedirect, getSearchResult, getUserId, emptyPlaylist };
+export { redirectToSpotifyAuthorize, getToken, currentToken, saveToken, setupTokenRefresh, loginWithSpotifyClick, logoutClick, handleRedirect, getSearchResult, getUserId, emptyPlaylist, addSongs };

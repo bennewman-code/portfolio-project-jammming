@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { SongContext } from './SongContext';
-import { getUserId, emptyPlaylist } from './authorisation';
+import { getUserId, emptyPlaylist, addSongs } from './authorisation';
 
 const PlayList = () =>  {
     const { addedSongs, setAddedSongs } = useContext(SongContext);
@@ -42,19 +42,22 @@ const CreatePlayList = () => {
         } else {
             return;
         }
-        const uri = uriArray.join();
+        const uris = uriArray
+        console.log(uris);
         // so profile awaits the getUserId in auth file that sends and api request for the users profile then profileId takes the user id from that request
         const profile = await getUserId();
         const profileId = profile.id;
         console.log(profileId);
         if (userInput !== '') {
             const createEmptyPlaylist = await emptyPlaylist(profileId, userInput);
-            console.log(createEmptyPlaylist);
+            const playlistId = (createEmptyPlaylist.id);
+            console.log(playlistId);
+            const addSongToPlaylist = await addSongs(playlistId, uris);
+            console.log(addSongToPlaylist); 
         } else {
             window.alert("Fill in name before saving playlist!");
             return
         }
-        
     }
     return (
         <div>
