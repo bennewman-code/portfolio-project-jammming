@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import SearchComponents from './searchBar.js';
@@ -30,7 +29,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <h1>Jammming</h1>
         {isLoggedIn ? (
           <div>
             <button onClick={ handleLogout }>Logout</button>
@@ -43,17 +42,6 @@ function App() {
             <button onClick={ handleLogin }>Login with Spotify</button>
           </div>
         )}
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
     </div>
   );

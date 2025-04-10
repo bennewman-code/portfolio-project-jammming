@@ -1,3 +1,4 @@
+import './playList.css';
 import React, { useState, useContext } from 'react';
 import { SongContext } from './SongContext';
 import { getUserId, emptyPlaylist, addSongs } from './authorisation';
@@ -60,9 +61,9 @@ const CreatePlayList = () => {
         }
     }
     return (
-        <div>
+        <div className='playlist'>
             <button type="button" onClick={ handleClick }>Save to Spotify</button>
-            <h4>Name</h4>
+            <h6>Name</h6>
             <input id="searchBar" type="text" onChange={ handleUserInput } value={ userInput } />
         </div>
     )
