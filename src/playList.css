@@ -3,8 +3,6 @@ h6 {
     margin-top: 10px;
 }
 
-.playlist {
-    display: grid;
-    justify-items: end;
-
+.searched-playlist {
+    margin-bottom: 100px;
 }

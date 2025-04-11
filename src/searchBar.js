@@ -1,3 +1,4 @@
+import './searchBar.css';
 import React, { useState, useContext } from 'react';
 import { getSearchResult } from './authorisation';
 import { SongContext } from './SongContext';
@@ -69,7 +70,7 @@ const Results = ({ searchResults, setAddedSongs }) => {
     // Used map as the return to go through the songPackage Array and unpackage the data into useful jsx
     // it works by iterating over the songPackage array then using the call back function on each element (the call back functions arugments are the song, Index)
     return (
-        <div> 
+        <div className='search-result'> 
             {songPackage.map((song, index) => (
                 <div key={ index }>
                     <p>Name: { song[0] }</p>

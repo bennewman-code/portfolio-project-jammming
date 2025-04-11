@@ -31,11 +31,11 @@ function App() {
       <header className="App-header">
         <h1>Jammming</h1>
         {isLoggedIn ? (
-          <div>
-            <button onClick={ handleLogout }>Logout</button>
-            <SearchComponents />
-            <CreatePlayList />
-            <PlayList />
+          <div className='body'>
+              <button onClick={ handleLogout }>Logout</button>
+              <SearchComponents />
+              <CreatePlayList />
+              <PlayList />
           </div>
         ) : (
           <div>

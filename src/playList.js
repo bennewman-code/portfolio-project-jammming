@@ -12,8 +12,7 @@ const PlayList = () =>  {
     // the h2 Playlist shows up in both login and logout states (it should only show up when logged in need to fix)
     //the ul bit doesnt work so ill have to try some stuff
     return (
-        <div>
-            <h2>Playlist</h2>
+        <div className='searched-playlist'>
             <div>
                 {addedSongs.map((song, index) => (
                     <div key={ index }>
@@ -61,7 +60,8 @@ const CreatePlayList = () => {
         }
     }
     return (
-        <div className='playlist'>
+        <div className='create-playlist'>
+            <h2>Playlist</h2>
             <button type="button" onClick={ handleClick }>Save to Spotify</button>
             <h6>Name</h6>
             <input id="searchBar" type="text" onChange={ handleUserInput } value={ userInput } />
