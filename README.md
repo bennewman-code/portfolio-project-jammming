@@ -1,3 +1,25 @@
+Projext Title - Jammming
+
+Description - The main purpose of this web app was to understand how to use React and how to do api calls.
+              There is no real problem this web app solves it's just a good learning tool for myself on how to do api calls.
+
+Features - This web app features the ability to login to spotify then procede to search any song see the cover art, name and artist of the song, you then
+           get too choose which songs to add to a playlist when youve added the songs you want youll be able to name the playlist then save it too your
+           spotify account.
+
+How to use - Check the React section of this ReadMe file to understand how to start the app.
+             The only thing youll need to do youself is go to spotify for developers then go to the dashboard press create app.
+             You can name it whatever you want same with other prompts the only one that matters is the redirect uri's, you can get that by going to src folder on the app
+             then opening authorisation.js then on the third line take the url from that exactly and add it to the app.
+             Then tick web api and terms and conditions then create.
+             Finally last step is to take the clientId they give you and go back to that same file then go to the second line and replace the text with it.
+             Then follow the prompts from the React section bellow to start the local server.
+
+Collaborators - Benjamin Newman other then myself I used Ai to understand some of the harder stuff but I tried to stay away to stop it from hindering my learning
+                I also frequented StackOver flow for some similar errors
+
+Licence - Mit just regular licence
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

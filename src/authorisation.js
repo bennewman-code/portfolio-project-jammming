@@ -1,5 +1,5 @@
 //This file is for authorisation of logins and api calls
-const clientId = '03ce66bd50a54bb78f5d89c1c401407e'; // your clientId
+const clientId = 'add your clientId here'; // your clientId
 const redirectUrl = 'http://127.0.0.1:3000/callback';        // your redirect URL - must be localhost URL and/or HTTPS
 
 const profileEndpoint = "https://api.spotify.com/v1/me"
